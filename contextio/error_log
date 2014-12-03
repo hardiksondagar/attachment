@@ -1,0 +1,44 @@
+[12-Nov-2014 07:25:04 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/get.php(16): ContextIO->addConnectToken(Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 07:25:31 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/get.php(16): ContextIO->addConnectToken(Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:19:17 Etc/GMT] PHP Warning:  Missing argument 2 for ContextIO::getConnectToken(), called in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 9 and defined in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 102
+[12-Nov-2014 10:19:17 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 1780
+[12-Nov-2014 10:19:18 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php(28): ContextIO->addConnectToken(NULL, Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:21:10 Etc/GMT] PHP Warning:  Missing argument 2 for ContextIO::getConnectToken(), called in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 9 and defined in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 102
+[12-Nov-2014 10:21:10 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 1780
+[12-Nov-2014 10:21:10 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php(28): ContextIO->addConnectToken(NULL, Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:22:00 Etc/GMT] PHP Warning:  Missing argument 2 for ContextIO::getConnectToken(), called in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 9 and defined in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 102
+[12-Nov-2014 10:22:00 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 1780
+[12-Nov-2014 10:28:40 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php(28): ContextIO->addConnectToken(NULL, Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:32:10 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php(28): ContextIO->addConnectToken(NULL, Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:33:32 Etc/GMT] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'params array contains invalid parameters or misses required parameters' in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php:122
+Stack trace:
+#0 /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php(28): ContextIO->addConnectToken(NULL, Array)
+#1 {main}
+  thrown in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/class.contextio.php on line 122
+[12-Nov-2014 10:42:52 Etc/GMT] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php:19) in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 38
+[12-Nov-2014 10:44:43 Etc/GMT] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php:19) in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 38
+[12-Nov-2014 10:46:58 Etc/GMT] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php:19) in /home/gridlrcm/public_html/shadimubarak.in/contextIO/php/add.php on line 38
