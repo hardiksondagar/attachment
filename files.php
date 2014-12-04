@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
 require_once 'src/Google_Client.php';
 require_once 'src/contrib/Google_Oauth2Service.php';
 include_once 'contextio/class.contextio.php';
@@ -88,9 +88,17 @@ if ($client->getAccessToken()) {
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-sanitize.js"></script>
 	
+	<style>
+	/*img.desaturate{
+-webkit-filter: grayscale(100%);
+filter: grayscale(100%);
+filter: gray;
+filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+}*/
+</style>
 
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -117,12 +125,11 @@ if ($client->getAccessToken()) {
        <li><a id="name" href="#" style="display:none;"></a></li>
 
        <?php
-       if(isset($authUrl))
-       {
-         echo "<li class='active'><a class='login' href='$authUrl'>Login with Gmail</a></li>";
-       }
-       else 
-       {
+       if(isset($authUrl)) {
+
+
+        echo "<li class='active'><a class='login' href='$authUrl'>Login with Gmail</a></li>";
+      } else {
         echo "<li id='profile-pic'><img src='$img?sz=50' class='desaturate'/></li>";
         ?>
 
@@ -132,8 +139,7 @@ if ($client->getAccessToken()) {
        <li ng-click="getMessages()"><a href="#"><i class="fa fa-refresh fa-2x"></i></a></li>
        <?php
        echo "<li class='active'><a class='logout' href='?logout'>Logout</a></li>";
-     }
-     ?>
+     }?>
    </ul>
  </div><!--/.nav-collapse -->
 </div>
@@ -143,6 +149,10 @@ if ($client->getAccessToken()) {
 <div id="hello">
   <div class="container">
    <div class="row">
+     <div class="col-lg-offset-9 col-lg-3">
+      <input class="form-control" ng-model="searchFile" placeholder="Search File">  
+    </div>
+
     <div class="col-lg-12 centered" ng-hide="!loading">
      <button id="loading" class="btn btn-info" ng-bind-html="loading"></button>
      <br>
@@ -161,68 +171,52 @@ if ($client->getAccessToken()) {
     {
       ?>
       
-      <div class="col-lg-10 col-lg-offset-1" id="mails" ng-init="getMessages()">
-        <div class="well col-lg-12" ng-show="selectedMessage" style="word-wrap: break-word;">
-          <i class="fa fa-2x fa-times-circle pull-right" ng-click="selectedMessage=null"  style="cursor:pointer"></i>
-          <strong>From: {{selectedEmail.addresses.from.name}}({{selectedEmail.addresses.from.email}})</strong>
-          <br>
-          <strong><span ng-repeat="toAddress in selectedEmail.addresses.to">To: {{toAddress.email}},</span></strong>
-          <hr>
-          <div ng-show="message.type=='text/html'" ng-bind-html="message.content"></div>
-          <div ng-show="message.type=='text/plain'" ng-bind="message.content"></div>
+      <div class="col-lg-12" id="files" ng-init="getFiles()">
 
-        </div>
-
-        <div class="col-lg-12"  ng-show="emails.length && !selectedMessage" >
-          <div class="col-lg-4">
-            <label>Please add Email  <i class="fa fa-plus-circle" ng-init="counter=1" ng-click="counter=counter+1"></i> <i class="fa fa-minus-circle" ng-show="counter>1" ng-click="counter=counter-1"></i></label>
-            <div class="form-group"  ng-repeat="i in getNumber(counter) track by $index" >
-              <input class="form-control"ng-model='searchFrom[$index]' placeholder="Email Address">
-            </div>
-          </div>
-          <br>
-        </div>
-
-        <table class="table" ng-show="emails.length  && !selectedMessage" style="max-height=400px">
+        <table class="table" ng-show="files.length" style="max-height=400px">
           <thead>
            <tr>
             <th>#</th>
-  								<!-- <th>Sender</th>
-  								<th>Email</th>
-  								<th>Subject</th>
-  							-->
-  							<th><a href="" ng-click="reverse=!reverse;order('addresses.from.name', reverse)">Sender</a>
+            <th>
+              <a href="" ng-click="reverse=!reverse;orderFile('name', reverse)">Name</a>
+            </th>
+            <th>
+              <a href="" ng-click="reverse=!reverse;orderFile('addresses.from.name', reverse)">Sender</a>
+            </th>
+            <th>
+              <a href="" ng-click="reverse=!reverse;orderFile('addresses.from.email', reverse)">Email</a>
+            </th>
+            <th>
+              <a href="" ng-click="reverse=!reverse;orderFile('subject',reverse)">Subject</a>
+            </th>
+            <th>
+              <a href="" ng-click="reverse=!reverse;orderFile('type',reverse)">Type</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="file in files | filter:searchFile" ng-click="getFile(file)" style="cursor:pointer">
+           <td>{{$index+1}}</td>
+           <td ng-bind="file.file_name"></td>
+           <td ng-bind="file.addresses.from.name"></td>
+           <td ng-bind="file.addresses.from.email"></td>
+           <td ng-bind="file.subject"></td>
+           <td ng-bind="file.type"></td>
+         </tr>
 
-  							</th>
-  							<th>
-  								<a href="" ng-click="reverse=!reverse;order('addresses.from.email', reverse)">Email</a>
-  							</th>
-  							<th>
-  								<a href="" ng-click="reverse=!reverse;order('subject',reverse)">Subject</a>
-  							</th>
-  						</tr>
-  					</thead>
-  					<tbody>
-  						<tr ng-repeat="email in emails | EmailSearch:searchFrom" ng-click="getMessageBody(email)" ng-class="{active:email.message_id==selectedMessage}" style="cursor:pointer">
-  							<td>{{$index+1}}</td>
-  							<td>{{email.addresses.from.name}}</td>
-  							<td>{{email.addresses.from.email}}</td>
-  							<td>{{email.subject}}</td>
-  						</tr>
-
-  					</tbody>
-  				</table>
+       </tbody>
+     </table>
 
 
-          <!-- <h2>FREE BOOTSTRAP THEMES</h2> -->
+     <!-- <h2>FREE BOOTSTRAP THEMES</h2> -->
 
 
-        </div><!-- /col-lg-8 -->
-        <?php
-      }
-    }
-    ?>
-  </div><!-- /row -->
+   </div><!-- /col-lg-8 -->
+   <?php
+ }
+}
+?>
+</div><!-- /row -->
 </div> <!-- /container -->
 </div><!-- /hello -->
 
@@ -231,7 +225,7 @@ if ($client->getAccessToken()) {
 	<!-- Placed at the end of the document so the pages load faster -->
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
