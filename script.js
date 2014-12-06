@@ -47,6 +47,45 @@
     }
   };
 
+  /* Highlight */
+  jQuery.fn.highlight = function (pat) {
+    function innerHighlight(node, pat) {
+      var skip = 0;
+      if (node.nodeType == 3) {
+        var pos = node.data.toUpperCase().indexOf(pat);
+        if (pos >= 0) {
+          var spannode = document.createElement('span');
+          spannode.className = 'highlight';
+          var middlebit = node.splitText(pos);
+          var endbit = middlebit.splitText(pat.length);
+          var middleclone = middlebit.cloneNode(true);
+          spannode.appendChild(middleclone);
+          middlebit.parentNode.replaceChild(spannode, middlebit);
+          skip = 1;
+        }
+      }
+      else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+        for (var i = 0; i < node.childNodes.length; ++i) {
+          i += innerHighlight(node.childNodes[i], pat);
+        }
+      }
+      return skip;
+    }
+    return this.length && pat && pat.length ? this.each(function () {
+      innerHighlight(this, pat.toUpperCase());
+    }) : this;
+  };
+  jQuery.fn.removeHighlight = function () {
+    return this.find("span.highlight").each(function () {
+      this.parentNode.firstChild.nodeName;
+      with (this.parentNode) {
+        replaceChild(this.firstChild, this);
+        normalize();
+      }
+    }).end();
+  };
+
+  
   app=angular.module('contextIO', ['ngSanitize']);
 
   app.controller('contextIOController', ['$scope','$http', '$filter', '$sce','$interval',function($scope,$http,$filter,$sce,$interval) {
@@ -122,9 +161,9 @@ $scope.getMessageBody=function(email)
 
    if(typeof data=="object")
    {
-
-    if(data.length==2)
-    {
+     console.log(data);
+     if(data.length==2)
+     {
       data[0]=data[1];
     }
 
@@ -206,10 +245,11 @@ $scope.getFile=function(file)
    url: "contextio/files.php?file_id="+$scope.selectedFile.file_id
  }).success(function (data, header) {
 
-   if(typeof data=="object")
+   if(data)
    {
+    jQuery('#download').attr('href',data);
+    jQuery('#download')[0].click();
 
-    console.log(data);
 
   }
   else
@@ -256,6 +296,26 @@ $scope.getNumber = function(num) {
   }
   ]
   );
+
+    app.filter('cut', function () {
+      return function (value, wordwise, max, tail) {
+        if (!value) return '';
+
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
+
+        value = value.substr(0, max);
+        if (wordwise) {
+          var lastspace = value.lastIndexOf(' ');
+          if (lastspace != -1) {
+            value = value.substr(0, lastspace);
+          }
+        }
+
+        return value + (tail || ' …');
+      };
+    });
 
     app.filter('EmailSearch', function() {
       return function(items, searchText) {
